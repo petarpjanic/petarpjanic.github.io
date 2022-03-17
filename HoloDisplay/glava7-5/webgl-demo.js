@@ -24,6 +24,7 @@ function toggleFullScreen() {
 
 function main() {
   const canvas = document.querySelector('#glcanvas');
+  document.body.requestFullscreen();
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
   const gl = canvas.getContext('webgl');
