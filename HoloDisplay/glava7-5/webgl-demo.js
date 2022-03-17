@@ -102,8 +102,7 @@ function main() {
     now *= 0.001;  // convert to seconds
     const deltaTime = now - then;
     then = now;
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+
     drawScene(gl, programInfo, buffers, texture, deltaTime);
 
     requestAnimationFrame(render);
