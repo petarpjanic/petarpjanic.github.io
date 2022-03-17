@@ -20,9 +20,6 @@ function toggleFullScreen() {
   else {
     cancelFullScreen.call(doc);
   }
-  const canvas = document.querySelector('#glcanvas');
-  canvas.width = window.innerWidth * window.devicePixelRatio;
-  canvas.height = window.innerHeight * window.devicePixelRatio;
 }
 
 function main() {
