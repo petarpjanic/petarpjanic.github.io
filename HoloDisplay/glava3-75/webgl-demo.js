@@ -20,13 +20,15 @@ function toggleFullScreen() {
   else {
     cancelFullScreen.call(doc);
   }
+  const canvas = document.querySelector('#glcanvas');
+  canvas.width = window.innerWidth * window.devicePixelRatio;
+  canvas.height = window.innerHeight * window.devicePixelRatio;
 }
 
 function main() {
   const canvas = document.querySelector('#glcanvas');
-  document.body.requestFullscreen();
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+  canvas.width = window.innerWidth * window.devicePixelRatio;
+  canvas.height = window.innerHeight * window.devicePixelRatio;
   const gl = canvas.getContext('webgl');
 
   // If we don't have a GL context, give up now

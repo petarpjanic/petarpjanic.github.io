@@ -20,11 +20,13 @@ function toggleFullScreen() {
   else {
     cancelFullScreen.call(doc);
   }
+  const canvas = document.querySelector('#glcanvas');
+  canvas.width = window.innerWidth * window.devicePixelRatio;
+  canvas.height = window.innerHeight * window.devicePixelRatio;
 }
 
 function main() {
   const canvas = document.querySelector('#glcanvas');
-  document.body.requestFullscreen();
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
   const gl = canvas.getContext('webgl');
