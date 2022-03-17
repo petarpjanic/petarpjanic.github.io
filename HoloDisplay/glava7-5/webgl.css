@@ -1,0 +1,12 @@
+canvas {
+	border: 0px solid black;
+	background-color: black;
+	margin: 0px;
+}
+video {
+	display: none;
+}
+html, body, div, canvas {
+    margin: 0;
+    padding: 0;
+}
