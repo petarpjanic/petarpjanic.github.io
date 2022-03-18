@@ -1,5 +1,5 @@
 var cubeRotation = 0.0;
-let offs = -1;
+let offs = -1+1/4 ;
 let rep = 0;
 
 main();
@@ -410,12 +410,7 @@ function drawScene(gl, programInfo, buffers, texture, deltaTime) {
       false,
       modelViewMatrix);
   gl.uniform1f( programInfo.uniformLocations.offs, offs);
-  if (rep == 0) {
-    rep = 1;
-  } else {
-    offs = offs === 0. ? -1.: offs + 1/4;
-    rep = 0;
-  }
+
   // Specify the texture to map onto the faces.
 
   // Tell WebGL we want to affect texture unit 0
@@ -437,6 +432,12 @@ function drawScene(gl, programInfo, buffers, texture, deltaTime) {
   // Update the rotation for the next draw
 
   cubeRotation += deltaTime;
+  if (rep == 0) {
+    rep = 1;
+  } else {
+    offs = offs === 0. ? -1+1/4: offs + 1/4;
+    rep = 0;
+  }
 }
 
 //

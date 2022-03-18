@@ -1,5 +1,5 @@
 var cubeRotation = 0.0;
-let offs = -1;
+let offs = -1+ 1/8;
 
 main();
 
@@ -410,7 +410,6 @@ function drawScene(gl, programInfo, buffers, texture, deltaTime) {
       false,
       modelViewMatrix);
   gl.uniform1f( programInfo.uniformLocations.offs, offs);
-  offs = offs === 0. ? -1.: offs + 1/8;
 
   // Specify the texture to map onto the faces.
 
@@ -433,6 +432,7 @@ function drawScene(gl, programInfo, buffers, texture, deltaTime) {
   // Update the rotation for the next draw
 
   cubeRotation += deltaTime;
+  offs = offs === 0. ? -1+ 1/8: offs + 1/8;
 }
 
 //

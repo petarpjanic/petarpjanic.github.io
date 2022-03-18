@@ -1,5 +1,5 @@
 var cubeRotation = 0.0;
-let offs = -1;
+let offs = -1 + 1/4;
 let rep = 0;
 let repLimit = 3;
 
@@ -432,9 +432,9 @@ function drawScene(gl, programInfo, buffers, texture, deltaTime) {
   // Update the rotation for the next draw
 
   cubeRotation += deltaTime;
-  if (rep == repLimit) {
+  if (rep == 3) {
     rep = 0;
-    offs = offs === 0. ? -1.: offs + 1/4;
+    offs = offs === 0. ? -1. + 1/4: offs + 1/4;
   } else {
     rep++;
   }
