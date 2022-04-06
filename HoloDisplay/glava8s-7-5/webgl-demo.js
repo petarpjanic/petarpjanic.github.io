@@ -1,12 +1,13 @@
 var cubeRotation = 0.0;
-let offs = -1+ 1/8;
+let offs = 0
+let rep = 0;
+let repLimit = 3;
 
 main();
 
 //
 // Start here
 //
-
 function toggleFullScreen() {
   var doc = window.document;
   var docEl = doc.documentElement;
@@ -24,8 +25,8 @@ function toggleFullScreen() {
 
 function main() {
   const canvas = document.querySelector('#glcanvas');
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+  canvas.width = window.innerWidth * window.devicePixelRatio;
+  canvas.height = window.innerHeight * window.devicePixelRatio;
   const gl = canvas.getContext('webgl');
 
   // If we don't have a GL context, give up now
@@ -63,7 +64,7 @@ function main() {
     uniform float offs;
 
     void main(void) {
-      gl_FragColor = texture2D(uSampler, vec2(vTextureCoord[0], 1. - vTextureCoord[1]/8.) + vec2(0., offs));
+      gl_FragColor = texture2D(uSampler, vec2(vTextureCoord[0]/8., 1. - vTextureCoord[1]) + vec2(offs, 0.));
     }
   `;
 
@@ -93,7 +94,7 @@ function main() {
   // objects we'll be drawing.
   const buffers = initBuffers(gl);
 
-  const texture = loadTexture(gl, 'allImgGlava.png');
+  const texture = loadTexture(gl, 'allImgGlavaUspravno8.png');
 
   var then = 0;
 
@@ -131,40 +132,40 @@ function initBuffers(gl) {
 
   const positions = [
     // Front face
-    -2.0, -1.0,  1.0,
-     2.0, -1.0,  1.0,
-     2.0,  1.0,  1.0,
-    -2.0,  1.0,  1.0,
+    -0.4, -0.8,  1.0,
+     0.4, -0.8,  1.0,
+     0.4,  0.8,  1.0,
+    -0.4,  0.8,  1.0,
 
     // Back face
-    -1.0, -1.0, -1.0,
-    -1.0,  1.0, -1.0,
-     1.0,  1.0, -1.0,
-     1.0, -1.0, -1.0,
+    -0.4, -1.0, -1.0,
+    -0.4,  1.0, -1.0,
+     0.4,  1.0, -1.0,
+     0.4, -1.0, -1.0,
 
     // Top face
-    -1.0,  1.0, -1.0,
-    -1.0,  1.0,  1.0,
-     1.0,  1.0,  1.0,
-     1.0,  1.0, -1.0,
+    -0.5, -1.0, -1.0,
+    -0.5,  1.0, -1.0,
+     0.5,  1.0, -1.0,
+     0.5, -1.0, -1.0,
 
     // Bottom face
-    -1.0, -1.0, -1.0,
-     1.0, -1.0, -1.0,
-     1.0, -1.0,  1.0,
-    -1.0, -1.0,  1.0,
+    -0.5, -1.0, -1.0,
+    -0.5,  1.0, -1.0,
+     0.5,  1.0, -1.0,
+     0.5, -1.0, -1.0,
 
     // Right face
-     1.0, -1.0, -1.0,
-     1.0,  1.0, -1.0,
-     1.0,  1.0,  1.0,
-     1.0, -1.0,  1.0,
+    -0.5, -1.0, -1.0,
+    -0.5,  1.0, -1.0,
+     0.5,  1.0, -1.0,
+     0.5, -1.0, -1.0,
 
     // Left face
-    -1.0, -1.0, -1.0,
-    -1.0, -1.0,  1.0,
-    -1.0,  1.0,  1.0,
-    -1.0,  1.0, -1.0,
+    -0.5, -1.0, -1.0,
+    -0.5,  1.0, -1.0,
+     0.5,  1.0, -1.0,
+     0.5, -1.0, -1.0,
   ];
 
   // Now pass the list of positions into WebGL to build the
@@ -410,7 +411,6 @@ function drawScene(gl, programInfo, buffers, texture, deltaTime) {
       false,
       modelViewMatrix);
   gl.uniform1f( programInfo.uniformLocations.offs, offs);
-
   // Specify the texture to map onto the faces.
 
   // Tell WebGL we want to affect texture unit 0
@@ -432,7 +432,12 @@ function drawScene(gl, programInfo, buffers, texture, deltaTime) {
   // Update the rotation for the next draw
 
   cubeRotation += deltaTime;
-  offs = offs === 0. ? -1+ 1/8: offs + 1/8;
+  if (rep == 0) {
+    rep = 0;
+    offs = offs === 1. - 1/8 ? 0.: offs + 1/8;
+  } else {
+    rep++;
+  }
 }
 
 //
