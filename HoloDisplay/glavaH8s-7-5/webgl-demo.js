@@ -434,7 +434,7 @@ function drawScene(gl, programInfo, buffers, texture, deltaTime) {
   cubeRotation += deltaTime;
   if (rep == 0) {
     rep = 0;
-    offs = offs === 1. - 1/8 ? 0.: offs + 1/8;
+    offs = offs === 1. - 1/16 ? 0.: offs + 1/16;
   } else {
     rep++;
   }
