@@ -64,7 +64,7 @@ function main() {
     uniform float offs;
 
     void main(void) {
-      gl_FragColor = texture2D(uSampler, vec2(vTextureCoord[0]/8., 1. - vTextureCoord[1]) + vec2(offs, 0.));
+      gl_FragColor = texture2D(uSampler, vec2(vTextureCoord[0]/16., 1. - vTextureCoord[1]) + vec2(offs, 0.));
     }
   `;
 
