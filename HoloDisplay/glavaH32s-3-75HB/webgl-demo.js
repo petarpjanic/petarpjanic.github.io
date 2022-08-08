@@ -5,6 +5,13 @@ let offs = [0, 0];
 let rep = 0;
 let repLimit = 3;
 
+let inputMessageTexture = "allImgHoloBabe1";
+
+var pubnub = new PubNub({
+  publishKey: 'pub-c-26a7baf7-1728-44f5-8cbd-2f35c460c8ef',
+  subscribeKey: 'sub-c-3a681513-3b09-4143-aa28-a05a3347988c'
+});
+
 main();
 
 //
@@ -30,6 +37,17 @@ function main() {
   canvas.width = window.innerWidth * window.devicePixelRatio;
   canvas.height = window.innerHeight * window.devicePixelRatio;
   const gl = canvas.getContext('webgl');
+
+  pubnub.addListener({
+    message: function(m) {
+      inputMessageTexture = m.message.text;
+      console.log(m.message.text);
+    }
+  })
+
+  pubnub.subscribe({
+    channels: ["msgTest"]
+  });
 
   // If we don't have a GL context, give up now
 
@@ -96,7 +114,11 @@ function main() {
   // objects we'll be drawing.
   const buffers = initBuffers(gl);
 
-  const texture = loadTexture(gl, 'allImgHoloBabe1.png');
+  const texture1 = loadTexture(gl, 'allImgHoloBabe1.png');
+  const texture2 = loadTexture(gl, 'StarWars1.png');
+  const texture3 = loadTexture(gl, 'Viking.png');
+  const texture4 = loadTexture(gl, 'Lighthouse.png');
+  
 
   var then = 0;
 
@@ -105,6 +127,16 @@ function main() {
     now *= 0.001;  // convert to seconds
     const deltaTime = now - then;
     then = now;
+    let texture;
+    if (inputMessageTexture === "allImgHoloBabe1") {
+      texture = texture1;
+    } else if (inputMessageTexture === "StarWars1") {
+      texture = texture2;
+    } else if (inputMessageTexture === "Viking") {
+      texture = texture3;
+    } else if (inputMessageTexture === "Lighthouse") {
+      texture = texture4;
+    }
 
     drawScene(gl, programInfo, buffers, texture, deltaTime);
 

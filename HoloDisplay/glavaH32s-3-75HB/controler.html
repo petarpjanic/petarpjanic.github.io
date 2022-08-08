@@ -1,0 +1,45 @@
+<doctype html>
+<script src = 'https://cdn.pubnub.com/sdk/javascript/pubnub.4.21.7.js'></script>
+<script>
+    var pubnub = new PubNub({
+        publishKey: 'pub-c-26a7baf7-1728-44f5-8cbd-2f35c460c8ef',
+        subscribeKey: 'sub-c-3a681513-3b09-4143-aa28-a05a3347988c'
+    });
+
+    function sendmessage(txt) {
+        pubnub.publish({
+            channel: "msgTest",
+            message: {
+                text: txt
+            }
+        });
+        console.log(txt);
+    }
+
+    function smHB() {
+        sendmessage("allImgHoloBabe1");
+    }
+
+    function smSW() {
+        sendmessage("StarWars1");
+    }
+
+    function smV() {
+        sendmessage("Viking");
+    }
+
+    function smLH() {
+        sendmessage("Lighthouse");
+    }
+
+    pubnub.subscribe({
+        channels: ["msgTest"]
+    });
+</script>
+
+<button onclick="smHB()">Holo Babe</button><br>
+<button onclick="smSW()">Star Wars</button><br>
+<button onclick="smV()">Viking</button><br>
+<button onclick="smLH()">Lighthouse</button>
+
+</doctype>
