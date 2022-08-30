@@ -1,0 +1,58 @@
+<doctype html>
+<script src = 'https://cdn.pubnub.com/sdk/javascript/pubnub.4.21.7.js'></script>
+<script>
+    var pubnub = new PubNub({
+        publishKey: 'pub-c-26a7baf7-1728-44f5-8cbd-2f35c460c8ef',
+        subscribeKey: 'sub-c-3a681513-3b09-4143-aa28-a05a3347988c'
+    });
+
+    function sendmessage(txt) {
+        pubnub.publish({
+            channel: "msgTest",
+            message: {
+                text: txt
+            }
+        });
+        console.log(txt);
+    }
+
+    function smHB() {
+        sendmessage("allImgHoloBabe1");
+    }
+
+    function smSW() {
+        sendmessage("StarWars1");
+    }
+
+    function smV() {
+        sendmessage("Viking");
+    }
+
+    function smLH() {
+        sendmessage("Lighthouse");
+    }
+
+    function sendNum() {
+        sendmessage("RC:" + document.getElementById("RC").value);
+        sendmessage("ST:" + document.getElementById("ID").value);
+    }
+
+    function sendSlider(val) {
+        sendmessage("SL:" + val);
+    }
+    
+
+    pubnub.subscribe({
+        channels: ["msgTest"]
+    });
+</script>
+
+<button onclick="smHB()">Holo Babe</button><br>
+<button onclick="smV()">Viking</button><br>
+rotation correction <input type="text" id="RC"><br>
+step <input type="text" id="ID"><br>
+<button onclick="sendNum()">Send</button><br>
+<input id="slide" type="range" min="-3" max="3" step="0.01" value="0" oninput="sendSlider(this.value)">
+
+
+</doctype>

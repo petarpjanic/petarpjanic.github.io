@@ -5,7 +5,7 @@ let offs = [0, 0];
 let rep = 0;
 let repLimit = 3;
 
-let inputMessageTexture = "allImgHoloBabe1";
+let inputMessageTexture = "Viking";
 
 var pubnub = new PubNub({
   publishKey: 'pub-c-26a7baf7-1728-44f5-8cbd-2f35c460c8ef',
