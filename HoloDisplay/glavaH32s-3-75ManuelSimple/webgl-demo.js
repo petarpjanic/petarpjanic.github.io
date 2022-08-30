@@ -183,9 +183,8 @@ function main() {
   const buffers = initBuffers(gl);
 
   const texture1 = loadTexture(gl, 'Holo Babe64.png');
-  const texture2 = loadTexture(gl, 'StarWars1.png');
   const texture3 = loadTexture(gl, 'Viking64.png');
-  const texture4 = loadTexture(gl, 'Lighthouse.png');
+
   
 
   var then = 0;
